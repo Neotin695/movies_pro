@@ -4,11 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_pro/core/utils/services/service_locator.dart';
 import 'package:movies_pro/movies/domain/entities/movie.dart';
 import 'package:movies_pro/movies/presentation/controller/movie_bloc.dart';
-import 'package:movies_pro/movies/presentation/controller/movie_event.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../core/utils/tools/enum_state.dart';
 import '../../data/models/now_playing_movie_model.dart';
+import '../controller/movie_event.dart';
 import '../controller/movie_state.dart';
 
 class PopularSeeMoreMovieScreen extends StatelessWidget {
@@ -20,7 +20,7 @@ class PopularSeeMoreMovieScreen extends StatelessWidget {
       appBar: AppBar(title: const Text('Popular')),
       body: BlocProvider(
         create: (_) {
-          return serviceLocator<MoviesBloc>();
+          return serviceLocator<MoviesBloc>()..add(GetPopularMoviesEvent());
         },
         child: BlocBuilder<MoviesBloc, MoviesState>(
           builder: (context, state) {
